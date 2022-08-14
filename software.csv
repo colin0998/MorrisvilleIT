@@ -1,0 +1,4 @@
+AppName,command
+Adobe CC,"\\software\ClientSW$\Adobe\SUNY ETLA 11-2019\Shared Device Licenses\Build\setup.exe"
+AutoCAD 2019,"\\software\autodesk\2022 Products\AutoCAD\AutoCAD_2022_English_Win_64bit_dlm\setup.exe"
+VLC,choco install vlc -y
