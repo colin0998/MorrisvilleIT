@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.DirectoryServices.Protocols;
+using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Text;
 using System.Windows.Forms;
 
 namespace MorrisvilleIT
