@@ -92,6 +92,8 @@
             this.MaximizeBox = false;
             this.Name = "Printers";
             this.Text = "Add a Printer";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Load += new System.EventHandler(this.Printers_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

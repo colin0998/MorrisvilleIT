@@ -187,5 +187,11 @@ namespace MorrisvilleIT
         {
             Process.Start("https://outlook.office365.com/owa/" + Main.mscuser + "@morrisville.edu");
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox aboutBox = new AboutBox();
+            aboutBox.Show();
+        }
     }
 }

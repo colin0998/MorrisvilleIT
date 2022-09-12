@@ -35,6 +35,7 @@ namespace MorrisvilleIT
             var p = new Process();
             p.StartInfo.FileName = "net";
             p.StartInfo.Arguments = "use \\\\print /user:CSNTPROD\\" + username + " " + password;
+            p.StartInfo.UseShellExecute = false;
             p.StartInfo.CreateNoWindow = true;
             p.Start();
             p.WaitForExit();

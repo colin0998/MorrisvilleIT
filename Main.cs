@@ -4,6 +4,7 @@ using System.DirectoryServices.Protocols;
 using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -11,23 +12,19 @@ namespace MorrisvilleIT
 {
     public partial class Main : Form
     {
-        public static Boolean netcheck;
         public static string mscuser, mscpass;
         public static string domain = "csntprod.morrisville.edu";
 
         public Main()
         {
             InitializeComponent();
+            isFortiClientInstalled();
+            VpnCheck();
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-            PingTest();
-            isFortiClientInstalled();
-            VpnCheck();
-
-
-
+            Updater updater = new Updater();
             if (Properties.Settings.Default.UserName != string.Empty)
             {
                 msc_username.Text = Properties.Settings.Default.UserName;
@@ -54,7 +51,7 @@ namespace MorrisvilleIT
             //MessageBox.Show(mscpass);
             if (mscuser != "" || mscpass != "")
             {
-                if (!netcheck)
+                if (!PingTest())
                 {
                     var vpnstart = new Process
                     {
@@ -93,24 +90,21 @@ namespace MorrisvilleIT
             }
         }
 
-        private void PingTest()
+        private bool PingTest()
         {
             var ping = new Ping();
             try
             {
                 var result = ping.Send("csntprod.morrisville.edu");
+                if (result.Status == System.Net.NetworkInformation.IPStatus.Success)
+                    return true;
+                else
+                    return false;
             }
             catch
             {
-                netcheck = false;
+                return false;
             }
-            /*
-            if (result.Status == System.Net.NetworkInformation.IPStatus.Success)
-                netcheck = true;
-            else
-                netcheck = false;
-            //MessageBox.Show(netcheck.ToString());
-            */
         }
 
         private void msc_username_TextChanged(object sender, EventArgs e)
@@ -232,19 +226,17 @@ namespace MorrisvilleIT
                 }
                 else if (error.Contains("773"))
                 {
-                    connectionstatus_text.Text = "You must reset your password. Please login to WebForStudents to reset it.";
+                    connectionstatus_text.Text = "You must reset your password. Please login to Office 365 to reset it.";
                 }
                 else if (error.Contains("775"))
                 {
                     connectionstatus_text.Text = "Your account is locked. Contact the Help Desk for assistance.";
                 }
             }
-            /*
             catch (Exception exc)
             {
-                connectionstatus_text.Text = exc.Message;
+                connectionstatus_text.Text = "Error: " + exc.Message;
             }
-            */
         }
 
         private void VpnCheck()

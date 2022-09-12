@@ -3,8 +3,9 @@ using System.Windows.Forms;
 
 namespace MorrisvilleIT
 {
-    internal static class Program
+    internal static class Default
     {
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
